@@ -13,7 +13,8 @@
 // @require      https://code.jquery.com/jquery-2.1.4.min.js
 // ==/UserScript==
 
-$(document).ready(function() {
+$(document).ready(function()
+{
   /**
    * ------------------------------------------------------------------------------
    * MODULE 1: CO-REQ HIGHLIGHTER
@@ -32,8 +33,14 @@ $(document).ready(function() {
    * This module will HIGHLIGHT the co-requisites for a course when it is selected
    * (when the checkbox under the "SELECT" column next to the course is checked).
    */
+    var className = "mymces_crh_row_color";
     var $checkboxes = $('input[type=checkbox][name=sel_crn]');
     var $labels = $('span.fieldBlacktextbold');
+
+    function getRandomColor()
+    {
+        return Math.floor(Math.random() * 16777215).toString(16);
+    }
 
     $checkboxes.change(function() {
         if ($(this).is(':checked')) {
@@ -46,23 +53,28 @@ $(document).ready(function() {
             var notes = $notesRow.text();
             var regex = /\d{5}/g;
             var crns = notes.match(regex);
-            console.log(crns);
 
             // Highlight related rows
             $.each($allRows, function(index, row) {
                 $crnLink = $(row).find('td:nth-of-type(2) > a');
 
                 if ($.inArray($crnLink.text(), crns) != -1) {
-                    $(row).css('background-color', 'yellow');
+                    var color = getRandomColor();
+                    $(row).css('background-color', '#' + color);
+                    $(row).data(className, color);
                 }
             });
         } else {
             // Get rows of interest
             var $allRows = $(this).closest('tbody').children('tr:gt(1)');
+            var $courseRow = $(this).closest('tr');
 
             // Reset row backgrounds
             $.each($allRows, function(index, row) {
-                $(row).css('background-color', 'white');
+                if ($(row).data(className) == $(courseRow).data(className)) {
+                    $(row).css('background-color', 'white');
+                    $(row).removeData(className);
+                }
             });
         }
     });
