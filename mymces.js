@@ -54,14 +54,18 @@ $(document).ready(function()
             var regex = /\d{5}/g;
             var crns = notes.match(regex);
 
-            // Highlight related rows
+            // Update row attributes
+            var color = getRandomColor();
             $.each($allRows, function(index, row) {
                 $crnLink = $(row).find('td:nth-of-type(2) > a');
 
                 if ($.inArray($crnLink.text(), crns) != -1) {
-                    var color = getRandomColor();
+                    // Set row background color
                     $(row).css('background-color', '#' + color);
                     $(row).data(className, color);
+
+                    // Check row checkbox
+                    $(row).find('input[type=checkbox][name=sel_crn]').prop('checked', true);
                 }
             });
         } else {
@@ -69,11 +73,17 @@ $(document).ready(function()
             var $allRows = $(this).closest('tbody').children('tr:gt(1)');
             var $courseRow = $(this).closest('tr');
 
-            // Reset row backgrounds
+            // Reset row attributes
+            var rowData = $courseRow.data(className);
+
             $.each($allRows, function(index, row) {
-                if ($(row).data(className) == $(courseRow).data(className)) {
+                if ($(row).data(className) == rowData) {
+                    // Reset row background color
                     $(row).css('background-color', 'white');
                     $(row).removeData(className);
+
+                    // Reset row checkbox
+                    $(row).find('input[type=checkbox][name=sel_crn]').prop('checked', false);
                 }
             });
         }
