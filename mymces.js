@@ -1,9 +1,13 @@
 // ==UserScript==
-// @name         MyMC Enhancement Suite
-// @namespace    http://jamisonbryant.com
+// @name         MyMC Enhancement Suite (MyMCES)
 // @version      0.1.0
+// @icon
 // @description  A number of improvements and optimizations for the Montgomery College student portal
+// @homepageURL  https://github.com/robojamison/mymces
+// @supportURL   https://github.com/robojamison/mymces/issues
 // @author       Jamison Bryant
+// @copyright    2015, Jamison Bryant (http://jamisonbryant.com)
+// @license      MIT License; https://opensource.org/licenses/MIT
 // @match        https://mcssb.glb.montgomerycollege.edu/*
 // @grant        none
 // @require      https://code.jquery.com/jquery-2.1.4.min.js
