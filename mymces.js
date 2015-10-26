@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         MyMC Enhancement Suite (MyMCES)
 // @version      0.1.0
-// @icon
+// @icon         https://raw.githubusercontent.com/robojamison/mymces/master/icon.jpg
 // @description  A number of improvements and optimizations for the Montgomery College student portal
 // @homepageURL  https://github.com/robojamison/mymces
 // @supportURL   https://github.com/robojamison/mymces/issues
